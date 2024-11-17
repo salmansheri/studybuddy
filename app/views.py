@@ -7,13 +7,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 
-# rooms = [
-#         {"id": 1, "name": "lets learn python!"}, 
-#         {"id": 2, "name": "Design with me"}, 
-#         {"id": 3, "name": "Frontend Developers"}, 
-#         ]
-# Create your views here.
-
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
