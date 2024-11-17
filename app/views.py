@@ -4,6 +4,7 @@ from .forms import RoomForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib import messages 
+from django.contrib.auth import authenticate, login, logout
 
 
 # rooms = [
@@ -17,11 +18,20 @@ def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(username)
         try:
             user=User.objects.get(username=username)
+            print(user)
+
         except:
-            messages.error(request, "Document deleted ")
-            
+            messages.error(request, "user doesnt exist")
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None: 
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(request, "Username or password does'nt exist")
     context={}
     return render(request, "app/auth.html",context)
 

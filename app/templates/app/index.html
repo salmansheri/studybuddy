@@ -9,7 +9,15 @@
 </head>
 
 <body>
-  {% include 'components/navbar.html' %} {% block content %} {% endblock %}
+  {% include 'components/navbar.html' %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li {% if messages.tags %} class="{{message.tags}}" {% endif %}>
+      {{message}}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% block content %} {% endblock %}
 </body>
 
 </html>
