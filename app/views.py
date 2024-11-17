@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Room, Topic
 from .forms import RoomForm
 from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib import messages 
 
 
 # rooms = [
@@ -10,6 +12,19 @@ from django.db.models import Q
 #         {"id": 3, "name": "Frontend Developers"}, 
 #         ]
 # Create your views here.
+
+def sign_in(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user=User.objects.get(username=username)
+        except:
+            messages.error(request, "Document deleted ")
+            
+    context={}
+    return render(request, "app/auth.html",context)
+
 def home(request):
     query= request.GET.get('q') if request.GET.get('q') != None else ""
     rooms=Room.objects.filter(

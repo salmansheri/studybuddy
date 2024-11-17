@@ -1,1 +1,13 @@
-l>
+{% extends 'app/index.html' %}
+{% block content %}
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter Username" />
+        <input type="password" name="Password" placeholder="Enter Password" />
+        <input type="submit" value="sign-in" />
+  </form>
+</div>
+
+{% endblock content %}
