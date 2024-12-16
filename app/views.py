@@ -29,7 +29,8 @@ def sign_in(request):
     return render(request, "app/auth.html",context)
 
 def home(request):
-    query= request.GET.get('q') if request.GET.get('q') != None else ""
+    query= request.GET.get('q') \
+        if request.GET.get('q') is not None else ""
     rooms=Room.objects.filter(
         Q(topic__name__icontains=query) |
         Q(name__icontains=query) |
